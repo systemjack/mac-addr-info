@@ -56,5 +56,6 @@ optional arguments:
 note: accepts mac address from stdin if not supplied as argument
 ```
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Acknowledgments
+I borrowed the MAC address regex from [here](https://stackoverflow.com/a/7629690/3019685).
