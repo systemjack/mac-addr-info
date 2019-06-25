@@ -58,4 +58,4 @@ note: accepts mac address from stdin if not supplied as argument
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ## Acknowledgments
-I borrowed the MAC address regex from [here](https://stackoverflow.com/a/7629690/3019685).
+I borrowed the MAC address regex from [here](https://stackoverflow.com/a/7629690/3019685). Much faster and more vetted than coming up with it myself.
