@@ -9,7 +9,7 @@ A docker file is provided to build a runable image (in which case a separate ins
 ```
 docker build -t mac-addr-info .
 ```
-You must have an existing account with [macaddress.io] in order to use this utility. 
+You must have an existing account with [macaddress.io](https://macaddress.io/) in order to use this utility. 
 The apiKey corresponding to your account must be provided by setting the **MACADDRESS_API_KEY** environment variable, or via the **key** command line parameter.
 ## Running the utility
 ### Example command line usage
