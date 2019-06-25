@@ -22,6 +22,10 @@ parser.add_argument('--api', default=macaddressio,
         help='api path (default: {})'.format(macaddressio))
 
 
+def is_valid_mac(mac):
+    return re.match('[0-9a-f]{2}([-:.]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', mac.lower())
+
+
 def lookup_mac(api, key, output, mac):
     try:
         payload = {'apiKey': key, 'output': output, 'search': mac}
@@ -35,6 +39,11 @@ def lookup_mac(api, key, output, mac):
 def main():
     args = parser.parse_args()
 
+    if not args.key:
+        sys.stderr.write('error: no api key specified\n\n')
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
     if not args.mac:
         if not sys.stdin.isatty():
             args.mac = sys.stdin.read()
@@ -43,13 +52,8 @@ def main():
             parser.print_help(sys.stderr)
             sys.exit(1)
 
-    if not re.match('[0-9a-f]{2}([-:.]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', args.mac.lower()):
+    if not is_valid_mac(args.mac):
         sys.stderr.write('error: invalid mac address: {}\n'.format(args.mac))
-        sys.exit(1)
-
-    if not args.key:
-        sys.stderr.write('error: no api key specified\n\n')
-        parser.print_help(sys.stderr)
         sys.exit(1)
 
     print(lookup_mac(args.api, args.key, args.output, args.mac))
