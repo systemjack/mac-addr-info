@@ -1,14 +1,17 @@
 # mac-addr-info
 A client using the macaddress.io API to look up MAC address metadata.
 ## Prerequisites
+### For command line use
 To use this script directly from the command line the [requests](https://2.python-requests.org/en/master/) library needs to be installed:
 ```
 pip install requests
 ```
+### Building a docker image
 A docker file is provided to build a runable image (in which case a separate install of **requests** is not required):
 ```
 docker build -t mac-addr-info .
 ```
+### An API key is required
 You must have an existing account with [macaddress.io](https://macaddress.io/) in order to use this utility. 
 The apiKey corresponding to your account must be provided by setting the **MACADDRESS_API_KEY** environment variable, or via the **key** command line parameter.
 ## Running the utility
@@ -66,4 +69,4 @@ note: accepts mac address from stdin if not supplied as argument
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ## Acknowledgments
-I borrowed the MAC address regex from [here](https://stackoverflow.com/a/7629690/3019685).
+I borrowed the MAC address regex from [here](https://stackoverflow.com/a/7629690/3019685). Much faster and more vetted than coming up with it myself.
