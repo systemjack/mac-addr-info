@@ -1,14 +1,17 @@
 # mac-addr-info
 A client using the macaddress.io API to look up MAC address metadata.
 ## Prerequisites
+### For command line use
 To use this script directly from the command line the [requests](https://2.python-requests.org/en/master/) library needs to be installed:
 ```
 pip install requests
 ```
+### Building a docker image
 A docker file is provided to build a runable image (in which case a separate install of **requests** is not required):
 ```
 docker build -t mac-addr-info .
 ```
+### An API key is required
 You must have an existing account with [macaddress.io](https://macaddress.io/) in order to use this utility. 
 The apiKey corresponding to your account must be provided by setting the **MACADDRESS_API_KEY** environment variable, or via the **key** command line parameter.
 ## Running the utility
