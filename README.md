@@ -51,10 +51,10 @@ Here are the detailed usage options:
 ```
 usage: mac-addr-info.py [-h] [--key KEY] [--output {vendor,json,xml,csv}]
                         [--api API]
-                        [mac]
+                        [mac [mac ...]]
 
 positional arguments:
-  mac                   mac address to query
+  mac                   mac address(es) to query
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -64,7 +64,7 @@ optional arguments:
                         output format to request (default: vendor)
   --api API             api path (default: https://api.macaddress.io/v1)
 
-note: accepts mac address from stdin if not supplied as argument
+note: accepts newline delimited mac addresses from stdin as well
 ```
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

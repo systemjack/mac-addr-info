@@ -10,7 +10,7 @@ import re
 import requests
 
 macaddressio = "https://api.macaddress.io/v1"
-epilog = 'note: accepts mac address from stdin if not supplied as argument'
+epilog = 'note: accepts newline delimited mac addresses from stdin as well'
 
 
 def parse_args():
