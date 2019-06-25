@@ -22,7 +22,7 @@ def parse_args():
             help='output format to request (default: vendor)')
     parser.add_argument('--api', default=macaddressio,
             help='api path (default: {})'.format(macaddressio))
-    return parser.parse_args()
+    return parser, parser.parse_args()
 
 
 def is_valid_mac(mac):
@@ -40,7 +40,7 @@ def lookup_mac(api, key, output, mac):
 
 
 def main():
-    args = parse_args()
+    parser, args = parse_args()
 
     if not args.key:
         sys.stderr.write('error: no api key specified\n\n')
