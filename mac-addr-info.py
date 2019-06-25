@@ -10,10 +10,10 @@ import re
 import requests
 
 macaddressio = "https://api.macaddress.io/v1"
-epilog = 'note: accepts newline delimited mac addresses from stdin as well'
 
 
 def parse_args():
+    epilog = 'note: accepts newline delimited mac addresses from stdin as well'
     parser = argparse.ArgumentParser(epilog=epilog)
     parser.add_argument('mac', nargs='*', help='mac address(es) to query')
     parser.add_argument('--key', default=os.environ.get('MACADDRESS_API_KEY', None),
