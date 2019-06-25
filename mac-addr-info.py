@@ -12,14 +12,17 @@ import requests
 macaddressio = "https://api.macaddress.io/v1"
 epilog = 'note: accepts mac address from stdin if not supplied as argument'
 
-parser = argparse.ArgumentParser(epilog=epilog)
-parser.add_argument('mac', nargs='?', help='mac address to query')
-parser.add_argument('--key', default=os.environ.get('MACADDRESS_API_KEY', None),
-        help='your macaddress.io api key (defaults to MACADDRESS_API_KEY environment variable)')
-parser.add_argument('--output', choices=['vendor', 'json', 'xml', 'csv'], default='vendor',
-        help='output format to request (default: vendor)')
-parser.add_argument('--api', default=macaddressio,
-        help='api path (default: {})'.format(macaddressio))
+
+def parse_args():
+    parser = argparse.ArgumentParser(epilog=epilog)
+    parser.add_argument('mac', nargs='*', help='mac address(es) to query')
+    parser.add_argument('--key', default=os.environ.get('MACADDRESS_API_KEY', None),
+            help='your macaddress.io api key (defaults to MACADDRESS_API_KEY environment variable)')
+    parser.add_argument('--output', choices=['vendor', 'json', 'xml', 'csv'], default='vendor',
+            help='output format to request (default: vendor)')
+    parser.add_argument('--api', default=macaddressio,
+            help='api path (default: {})'.format(macaddressio))
+    return parser.parse_args()
 
 
 def is_valid_mac(mac):
@@ -37,7 +40,7 @@ def lookup_mac(api, key, output, mac):
 
 
 def main():
-    args = parser.parse_args()
+    args = parse_args()
 
     if not args.key:
         sys.stderr.write('error: no api key specified\n\n')
@@ -46,17 +49,18 @@ def main():
 
     if not args.mac:
         if not sys.stdin.isatty():
-            args.mac = sys.stdin.read()
+            args.mac = sys.stdin.readlines()
         else:
             sys.stderr.write('error: must provide mac address\n\n')
             parser.print_help(sys.stderr)
             sys.exit(1)
 
-    if not is_valid_mac(args.mac):
-        sys.stderr.write('error: invalid mac address: {}\n'.format(args.mac))
-        sys.exit(1)
-
-    print(lookup_mac(args.api, args.key, args.output, args.mac))
+    for m in args.mac:
+        m = m.rstrip()
+        if is_valid_mac(m):
+            print(lookup_mac(args.api, args.key, args.output, m))
+        else:
+            sys.stderr.write('warning: skipping invalid mac address: {}\n'.format(m))
 
 
 if __name__ == '__main__':

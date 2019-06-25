@@ -29,6 +29,14 @@ Here is an example passing the apiKey into the container via environment variabl
 ```
 docker run -e "MACADDRESS_API_KEY=your_api_key" mac-addr-info 44:38:39:ff:ef:57
 ```
+### Multiple MAC arguments
+If more than one MAC address is supplied, the application will make a request for each MAC and print out the result on a separate line. Multiple addresses provided via standard input must be newline separated. Invalid MAC addresses will be skipped without interrupting the process.
+Examples:
+```
+printf "44.38.39.ff.ef.57\n5c:f9:38:92:6d:30\n" | ./mac-addr-info.py
+
+./mac-addr-info.py 443839ffef57 5c:f9:38:92:6d:30
+```
 ### Controlling output
 The **--output** parameter can be used to control the format of the query results.
 
