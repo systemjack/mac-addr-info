@@ -1,5 +1,5 @@
 # mac-addr-info
-A client using the macaddress.io API to look up MAC address metadata.
+A client using the [macaddress.io](https://macaddress.io/) API to look up MAC address metadata.
 ## Prerequisites
 ### For command line use
 To use this script directly from the command line the [requests](https://2.python-requests.org/en/master/) library needs to be installed:
